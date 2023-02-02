@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <Context reloadable="true">
+        <!--
+        <Realm className="org.apache.catalina.realm.DataSourceRealm"
+            dataSourceName="jdbc/selfjsp"
+            userTable="usr" roleNameCol="role" userCredCol="passwd"
+            userRoleTable="usr_role" userNameCol="uid"
+            localDataSource="true">
+            <CredentialHandler className="org.apache.catalina.realm.MessageDigestCredentialHandler"
+                algorithm="SHA-512" />
+        </Realm>
+        -->
+        <Resource name="jdbc/selfjsp" auth="Container" type="javax.sql.DataSource" driverClassName="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost/selfjsp" username="jspusr" password="jsp@Pass1" maxTotal="4" maxWaitMillis="5000" maxIdle="2" validationQuery="SELECT count(*) FROM book"></Resource>
+        <!--
+        <Valve className="org.apache.catalina.valves.AccessLogValve"
+        prefix="SelfJsp." suffix=".log"
+        fileDateFormat="yyyy-MM" pattern="%t %U %T %a %b" />
+        -->
+    </Context>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<title>書籍の検索</title>
+</head>
+<body>
+<form>
+<label for="keywd">検索キーワード：</label>
+<input id="keywd" type="text" size="15">
+<input id="btnSearch" type="button" value="検索">
+</form>
+<table class="table">
+    <thead>
+        <tr>
+        <th>ISBNコード</th><th>書名</th><th>価格</th>
+        <th>出版社</th><th>刊行日</th>
+        </tr>
+    </thead>
+    <tbody id="result"></tbody>
+</table>
+<script>
+document.getElementById('btnSearch').addEventListener('click', function(e) {
+    let params = new URLSearchParams();
+    params.set('keywd', document.getElementById('keywd').value);
+    fetch('./GsonServlet?' + params.toString())
+        .then(function(response) {
+        return response.json();
+        })
+        .then(function(data) {
+        let result = '';
+        for (let item of data) {
+            result += `<tr>
+            <td>${item.isbn}</td>
+            <td>${item.title}</td>
+            <td>${item.price}円</td>
+            <td>${item.publish}</td>
+            <td>${item.published}</td>
+            </tr>`;
+        }
+    document.getElementById('result').innerHTML = result;
+    });
+}, false);
+</script>
+</body>
+</html>
