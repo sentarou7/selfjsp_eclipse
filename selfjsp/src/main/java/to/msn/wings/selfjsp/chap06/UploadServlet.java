@@ -20,7 +20,7 @@ public class UploadServlet extends HttpServlet {
         Part part = request.getPart("file");
         String name = part.getSubmittedFileName();
         if (this.isValidFile(name)) {
-        	System.out.println("★:"+ getServletContext().getRealPath("/WEB-INF/data") );
+        	System.out.println("アップロード先:"+ getServletContext().getRealPath("/WEB-INF/data") );
             part.write(getServletContext().getRealPath("/WEB-INF/data") + "/" + name);
             response.sendRedirect("upload.jsp");
         } else {
